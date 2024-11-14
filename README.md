@@ -2,7 +2,7 @@
 Sistema de logistica com cadastro de usuários, pedidiso e entregas
 
 ## Descrição
-Sistema voltado para logística de entrega de pedidos.
+Sistema voltado para gerenciamento de pedidos diversos.
 
 ## Premissas
 [ ] - Usar SQL Server
