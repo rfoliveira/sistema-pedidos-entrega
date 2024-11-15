@@ -1,10 +1,12 @@
 # sistema-pedidos-entrega
 Sistema de logistica com cadastro de usuários, pedidiso e entregas
 
+Ref.: [Contexto](https://pastebin.com/zSF1S3QJ)
+
 ## Descrição
 Sistema voltado para gerenciamento de pedidos diversos.
 
-## Premissas
+## Premissas 
 [ ] - Usar SQL Server
 [ ] - Backend em asp.net core com API REST
 [ ] - Front em WebForms
