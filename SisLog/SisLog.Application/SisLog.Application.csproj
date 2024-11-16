@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Commands\Pedido\" />
     <Folder Include="Handlers\Pedido\" />
-    <Folder Include="Behaviours\" />
     <Folder Include="Queries\Pedido\" />
   </ItemGroup>
 
