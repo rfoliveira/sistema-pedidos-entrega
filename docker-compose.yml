@@ -12,19 +12,6 @@ services:
       - ./mssql_data/:/var/opt/mssql/data
       - ./mssql_logs/:/var/opt/mssql/log
 
-  # migrations:
-  #   image: ${DOCKER_REGISTRY-}migrations
-  #   container_name: migrations
-  #   build:
-  #     context: ./SisLog
-  #     dockerfile: SisLog.API/Dockerfile
-  #     target: migrations-build
-  #   environment:
-  #     ASPNETCORE_ENVIRONMENT: Development
-  #     ConnectionStrings__SqlServerConnection: Server=sislogdb;Database=sislogdb;User Id=${MSSQL_USER};Password=${MSSQL_PASS};Encrypt=True;TrustServerCertificate=True;
-  #   depends_on:
-  #     - sislogdb
-
   sislogapi:
     image: ${DOCKER_REGISTRY-}sislogapi
     container_name: sislogapi
@@ -43,7 +30,6 @@ services:
       - ./certificate.pfx:/https/certificate.pfx
     depends_on:
       - sislogdb
-      # - migrations
     ports:
       - "${API_HTTP_PORT}:80"
       - "${API_HTTPS_PORT}:443"
