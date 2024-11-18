@@ -4,9 +4,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+EXPOSE 80
+EXPOSE 443
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
@@ -22,6 +21,19 @@ RUN dotnet build "./SisLog.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./SisLog.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+#FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-infra
+#WORKDIR /src
+#COPY ["SisLog.Infrastructure/SisLog.Infrastructure.csproj", "SisLog.Infrastructure/"]
+#RUN dotnet restore "./SisLog.Infrastructure/SisLog.Infrastructure.csproj"
+#COPY . .
+#WORKDIR "/src/SisLog.Infrastructure"
+#RUN dotnet build "./SisLog.Infrastructure.csproj" -c Release -o /app/publish/infra
+#
+#FROM build-infra AS migrations-build
+#WORKDIR /app/publish/infra
+#COPY --from=build-infra /app/publish/infra .
+#ENTRYPOINT ["dotnet", "ef", "database", "update", "--project", "src/SisLog.Infrastructure/", "--verbose"]
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final

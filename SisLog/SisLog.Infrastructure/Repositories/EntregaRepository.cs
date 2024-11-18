@@ -4,6 +4,6 @@ using SisLog.Infrastructure.Data;
 
 namespace SisLog.Infrastructure.Repositories;
 
-public class EntregaRepository(SisLogContext dbContext) : BaseRepository<Entrega>(dbContext), IEntregaRepository
+public class EntregaRepository(SisLogDbContext dbContext) : BaseRepository<Entrega>(dbContext), IEntregaRepository
 {
 }

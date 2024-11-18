@@ -8,9 +8,11 @@ public class EntregaEntityTypeConfiguration : IEntityTypeConfiguration<Entrega>
 {
     public void Configure(EntityTypeBuilder<Entrega> builder)
     {
+        builder.HasKey(e => e.Id);
         builder.Property(e => e.Numero).IsRequired();
-        builder.Property(e => e.Endereco).IsRequired();
-        builder.Property(e => e.PedidoId).IsRequired();
-        builder.HasOne(e => e.Pedido);
+        builder.HasOne(e => e.Pedido)
+            .WithOne(p => p.Entrega)
+            .HasForeignKey<Entrega>(e => e.PedidoId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

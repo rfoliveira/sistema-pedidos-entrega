@@ -7,12 +7,12 @@ using System.Linq.Expressions;
 
 namespace SisLog.Infrastructure.Repositories;
 
-public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 {
-    protected readonly SisLogContext DbContext;
+    protected readonly SisLogDbContext DbContext;
     private readonly DbSet<TEntity> _entity;
 
-    protected BaseRepository(SisLogContext dbContext)
+    protected BaseRepository(SisLogDbContext dbContext)
     {
         DbContext = dbContext;
         _entity = DbContext.Set<TEntity>();
@@ -32,15 +32,16 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
 
     public async Task<TEntity> CreateAsync(TEntity entity)
     {
-
+        entity.CriadoEm = DateTime.Now;
         _entity.Add(entity);
         await DbContext.SaveChangesAsync();
+
         return entity;
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        entity.AtualizadoEm = DateTime.UtcNow;
+        entity.AtualizadoEm = DateTime.Now;
         _entity.Entry(entity).State = EntityState.Modified;
         await DbContext.SaveChangesAsync();
 
@@ -53,7 +54,7 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
         {
             if (logicalDelete)
             {
-                entity.RemovidoEm = DateTime.UtcNow;
+                entity.RemovidoEm = DateTime.Now;
                 _entity.Entry(entity).State = EntityState.Modified;
             }
             else

@@ -4,15 +4,16 @@ using SisLog.Infrastructure.Data.Configurations;
 
 namespace SisLog.Infrastructure.Data;
 
-public class SisLogContext : DbContext
+public class SisLogDbContext : DbContext
 {
+    public SisLogDbContext(DbContextOptions<SisLogDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<Entrega> Entregas { get; set; }
-
-    public SisLogContext(DbContextOptions options) : base(options)
-    {
-    }
+    public DbSet<Endereco> Enderecos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

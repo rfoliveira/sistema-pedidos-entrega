@@ -9,7 +9,7 @@ using System.Net;
 namespace SisLog.API.Controllers;
 
 [ApiController]
-[Route("api/v1/{controller}")]
+[Route("api/v1/[controller]")]
 public class UsuariosController : ControllerBase
 {
     private readonly IMediator _mediatr;
@@ -47,7 +47,7 @@ public class UsuariosController : ControllerBase
     public async Task<IActionResult> CreateAsync([FromBody] CreateUsuarioCommand usuario)
     {
         var usuarioNovo = await _mediatr.Send(usuario);
-        return CreatedAtAction(nameof(GetByIdAsync), usuarioNovo);
+        return CreatedAtRoute(new { id = usuarioNovo.Id }, usuarioNovo);
     }
 
     [HttpPut]

@@ -30,7 +30,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
             // Obtém a lista de falhas
             var failures = validationResults.SelectMany(ve => ve.Errors).Where(f => f != null).ToList();
 
-            if (failures.Count != 0)
+            if (failures.Count > 0)
                 throw new ValidationException(failures);
         }
 

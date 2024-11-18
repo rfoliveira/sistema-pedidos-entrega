@@ -8,6 +8,7 @@ public class UsuarioEntityTypeConfiguration : IEntityTypeConfiguration<Usuario>
 {
     public void Configure(EntityTypeBuilder<Usuario> builder)
     {
+        builder.HasKey(u => u.Id);
         builder.Property(u => u.Nome)
             .IsRequired()
             .HasMaxLength(30);
@@ -20,6 +21,6 @@ public class UsuarioEntityTypeConfiguration : IEntityTypeConfiguration<Usuario>
             .IsRequired()
             .HasMaxLength(20);
 
-        builder.Property(u => u.CriadoEm).IsRequired();
+        builder.Property(u => u.CriadoEm).IsRequired();        
     }
 }

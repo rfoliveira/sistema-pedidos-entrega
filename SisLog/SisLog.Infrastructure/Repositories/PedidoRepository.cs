@@ -4,6 +4,6 @@ using SisLog.Infrastructure.Data;
 
 namespace SisLog.Infrastructure.Repositories;
 
-public class PedidoRepository(SisLogContext dbContext) : BaseRepository<Pedido>(dbContext), IPedidoRepository
+public class PedidoRepository(SisLogDbContext dbContext) : BaseRepository<Pedido>(dbContext), IPedidoRepository
 {
 }

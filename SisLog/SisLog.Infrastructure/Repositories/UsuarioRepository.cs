@@ -4,7 +4,7 @@ using SisLog.Infrastructure.Data;
 
 namespace SisLog.Infrastructure.Repositories;
 
-public class UsuarioRepository(SisLogContext dbContext) : BaseRepository<Usuario>(dbContext), IUsuarioRepository
+public class UsuarioRepository(SisLogDbContext dbContext) : BaseRepository<Usuario>(dbContext), IUsuarioRepository
 {
     public async Task<Usuario?> GetByNome(string nome)
     {

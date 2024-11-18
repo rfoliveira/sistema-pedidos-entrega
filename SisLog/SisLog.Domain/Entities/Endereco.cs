@@ -8,4 +8,6 @@ public class Endereco : BaseEntity
     public string Bairro { get; set; } = default!;
     public string Cidade { get; set; } = default!;
     public string Estado { get; set; } = default!;
+
+    public Entrega? Entrega { get; set; }
 }

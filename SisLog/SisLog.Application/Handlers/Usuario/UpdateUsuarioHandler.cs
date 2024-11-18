@@ -29,6 +29,10 @@ public class UpdateUsuarioHandler : IRequestHandler<UpdateUsuarioCommand, Usuari
             throw new UsuarioNotFoundException("ID", request.Id);
         }
 
+        usuarioAAlterar.Nome = request.Nome;
+        usuarioAAlterar.Email = request.Email;
+        usuarioAAlterar.Senha = request.Senha;
+
         var usuario = usuarioAAlterar.Adapt<Domain.Entities.Usuario>();
         usuario = await _repo.UpdateAsync(usuario);
 
