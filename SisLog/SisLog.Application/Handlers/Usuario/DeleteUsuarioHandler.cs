@@ -25,7 +25,7 @@ public class DeleteUsuarioHandler : IRequestHandler<DeleteUsuarioCommand, bool>
         if (usuarioARemover == null)
         {
             _logger.LogInformation("Usuário com ID {Id} não encontrado", request.Id);
-            throw new UsuarioNotFoundException("ID", request.Id);
+            throw new UsuarioNaoEncontradoException("ID", request.Id);
         }
 
         var usuario = usuarioARemover.Adapt<Domain.Entities.Usuario>();

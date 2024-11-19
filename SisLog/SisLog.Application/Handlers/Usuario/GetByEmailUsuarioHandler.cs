@@ -26,7 +26,7 @@ public class GetByEmailUsuarioHandler : IRequestHandler<GetByEmailUsuarioQuery, 
         if (usuario == null)
         {
             _logger.LogInformation("Usuário com Email {Email} não encontrado", request.Email);
-            throw new UsuarioNotFoundException("Email", request.Email);
+            throw new UsuarioNaoEncontradoException("Email", request.Email);
         }
 
         return usuario.Adapt<UsuarioResponse>();

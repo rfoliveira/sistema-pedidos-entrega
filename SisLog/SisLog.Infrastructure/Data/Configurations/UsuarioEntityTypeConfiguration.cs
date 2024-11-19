@@ -11,7 +11,7 @@ public class UsuarioEntityTypeConfiguration : IEntityTypeConfiguration<Usuario>
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Nome)
             .IsRequired()
-            .HasMaxLength(30);
+            .HasMaxLength(50);
 
         builder.Property(u => u.Email)
             .IsRequired()
@@ -19,7 +19,7 @@ public class UsuarioEntityTypeConfiguration : IEntityTypeConfiguration<Usuario>
 
         builder.Property(u => u.Senha)
             .IsRequired()
-            .HasMaxLength(20);
+            .HasMaxLength(512);
 
         builder.Property(u => u.CriadoEm).IsRequired();        
     }

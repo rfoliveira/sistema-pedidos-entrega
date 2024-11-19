@@ -26,7 +26,7 @@ public class GetByNomeUsuarioHandler : IRequestHandler<GetByNomeUsuarioQuery, Us
         if (usuario == null)
         {
             _logger.LogInformation("Usuário com Nome {Nome} não encontrado", request.Nome);
-            throw new UsuarioNotFoundException("Nome", request.Nome);
+            throw new UsuarioNaoEncontradoException("Nome", request.Nome);
         }
 
         return usuario.Adapt<UsuarioResponse>();

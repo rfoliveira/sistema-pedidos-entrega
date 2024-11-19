@@ -30,7 +30,7 @@ public class UsuariosController : ControllerBase
 
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(UsuarioResponse), (int)HttpStatusCode.OK)]
-    [ProducesErrorResponseType(typeof(UsuarioNotFoundException))]
+    [ProducesErrorResponseType(typeof(UsuarioNaoEncontradoException))]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
     {
         if (id <= 0)
@@ -69,5 +69,21 @@ public class UsuariosController : ControllerBase
         await _mediatr.Send(command);
 
         return NoContent();
+    }
+
+    [HttpPost("Login")]
+    public async Task<IActionResult> Login([FromBody] LoginUsuarioCommand login)
+    {
+        var usuarioValido = await _mediatr.Send(login);
+
+        var command = new CreateTokenCommand(
+            usuarioValido.Id,
+            usuarioValido.Nome,
+            usuarioValido.Email
+        );
+
+        var token = await _mediatr.Send(command);
+
+        return Ok(token);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Options;
 using SisLog.Application;
+using SisLog.Domain.Settings;
 using SisLog.Infrastructure;
 
 namespace SisLog.API;
@@ -11,6 +13,8 @@ internal static class Setup
 
     public static IHostApplicationBuilder AddAPI(this IHostApplicationBuilder builder)
     {
+        builder.AddJwt();
+
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -28,6 +32,12 @@ internal static class Setup
         });
 
         return builder;
+    }
+
+    private static void AddJwt(this IHostApplicationBuilder builder)
+    {
+        builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+        builder.Services.AddSingleton<ITokenSettings>(sp => sp.GetRequiredService<IOptions<TokenSettings>>().Value);
     }
 
     public static void CheckDevModeConfig(this IHost host, IWebHostEnvironment env)
