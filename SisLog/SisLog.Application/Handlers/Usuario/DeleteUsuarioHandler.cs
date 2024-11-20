@@ -7,7 +7,7 @@ using SisLog.Domain.Repositories;
 
 namespace SisLog.Application.Handlers.Usuario;
 
-public class DeleteUsuarioHandler : IRequestHandler<DeleteUsuarioCommand, bool>
+public class DeleteUsuarioHandler : IRequestHandler<DeleteUsuarioCommand, Unit>
 {
     private readonly IUsuarioRepository _repo;
     private readonly ILogger<DeleteUsuarioHandler> _logger;
@@ -18,7 +18,7 @@ public class DeleteUsuarioHandler : IRequestHandler<DeleteUsuarioCommand, bool>
         _logger = logger;
     }
 
-    public async Task<bool> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
     {
         var usuarioARemover = await _repo.GetByIdAsync(request.Id);
 
@@ -34,6 +34,6 @@ public class DeleteUsuarioHandler : IRequestHandler<DeleteUsuarioCommand, bool>
         if (retorno)
             _logger.LogInformation("Usuario removido com sucesso");
 
-        return retorno;
+        return Unit.Value;
     }
 }

@@ -6,7 +6,6 @@ using SisLog.Application.Exceptions.Usuario;
 using SisLog.Application.Responses.Usuario;
 using SisLog.Domain.Extensions;
 using SisLog.Domain.Repositories;
-using SisLog.Domain.Settings;
 
 namespace SisLog.Application.Handlers.Usuario;
 
@@ -14,13 +13,11 @@ public class LoginUsuarioHandler : IRequestHandler<LoginUsuarioCommand, LoginRes
 {
     private readonly IUsuarioRepository _repo;
     private readonly ILogger<LoginUsuarioHandler> _logger;
-    private readonly ITokenSettings _tokenSettings;
 
-    public LoginUsuarioHandler(IUsuarioRepository repo, ILogger<LoginUsuarioHandler> logger, ITokenSettings tokenSettings)
+    public LoginUsuarioHandler(IUsuarioRepository repo, ILogger<LoginUsuarioHandler> logger)
     {
         _repo = repo;
         _logger = logger;
-        _tokenSettings = tokenSettings;
     }
 
     public async Task<LoginResponse> Handle(LoginUsuarioCommand request, CancellationToken cancellationToken)

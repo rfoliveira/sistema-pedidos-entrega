@@ -8,6 +8,7 @@ var app = builder.Build();
 app.CheckDevModeConfig(builder.Environment);
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.AddHealthCheckEndpoints();

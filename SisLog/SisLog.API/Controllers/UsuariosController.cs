@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SisLog.Application.Commands.Usuario;
 using SisLog.Application.Exceptions.Usuario;
@@ -10,6 +11,7 @@ namespace SisLog.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
+[Authorize]
 public class UsuariosController : ControllerBase
 {
     private readonly IMediator _mediatr;
@@ -42,9 +44,10 @@ public class UsuariosController : ControllerBase
         return Ok(usuario);
     }
 
-    [HttpPost]
+    [HttpPost("Register")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(UsuarioResponse), (int)HttpStatusCode.Created)]
-    public async Task<IActionResult> CreateAsync([FromBody] CreateUsuarioCommand usuario)
+    public async Task<IActionResult> RegisterAsync([FromBody] CreateUsuarioCommand usuario)
     {
         var usuarioNovo = await _mediatr.Send(usuario);
         return CreatedAtRoute(new { id = usuarioNovo.Id }, usuarioNovo);
@@ -72,7 +75,8 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login([FromBody] LoginUsuarioCommand login)
+    [AllowAnonymous]
+    public async Task<IActionResult> LoginAsync([FromBody] LoginUsuarioCommand login)
     {
         var usuarioValido = await _mediatr.Send(login);
 

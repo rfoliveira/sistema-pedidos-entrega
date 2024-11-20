@@ -2,9 +2,9 @@
 using SisLog.Application.Commands.Usuario;
 using System.Text.RegularExpressions;
 
-namespace SisLog.Application.Validators;
+namespace SisLog.Application.Validators.Usuario;
 
-public class LoginUsuarioValidator : AbstractValidator<LoginUsuarioCommand>
+internal class LoginUsuarioValidator : AbstractValidator<LoginUsuarioCommand>
 {
     public LoginUsuarioValidator()
     {

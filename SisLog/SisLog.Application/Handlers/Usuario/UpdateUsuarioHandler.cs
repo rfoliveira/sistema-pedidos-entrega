@@ -8,7 +8,7 @@ using SisLog.Domain.Repositories;
 
 namespace SisLog.Application.Handlers.Usuario;
 
-public class UpdateUsuarioHandler : IRequestHandler<UpdateUsuarioCommand, UsuarioResponse>
+public class UpdateUsuarioHandler : IRequestHandler<UpdateUsuarioCommand, Unit>
 {
     private readonly IUsuarioRepository _repo;
     private readonly ILogger<UpdateUsuarioHandler> _logger;
@@ -19,7 +19,7 @@ public class UpdateUsuarioHandler : IRequestHandler<UpdateUsuarioCommand, Usuari
         _logger = logger;
     }
 
-    public async Task<UsuarioResponse> Handle(UpdateUsuarioCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateUsuarioCommand request, CancellationToken cancellationToken)
     {
         var usuarioAAlterar = await _repo.GetByIdAsync(request.Id);
 
@@ -39,6 +39,6 @@ public class UpdateUsuarioHandler : IRequestHandler<UpdateUsuarioCommand, Usuari
         if (usuario != null)
             _logger.LogInformation("Usuario alterado com sucesso");
 
-        return usuario.Adapt<UsuarioResponse>();
+        return Unit.Value;
     }
 }
