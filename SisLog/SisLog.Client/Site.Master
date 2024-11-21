@@ -13,8 +13,13 @@
     </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <webopt:bundlereference runat="server" path="~/Content/fontawesome" />
 
+    <asp:PlaceHolder runat="server">
+        <%: Styles.Render("~/bundles/adminlte/css") %>
+    </asp:PlaceHolder>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
     <form runat="server">
@@ -64,7 +69,7 @@
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-        <%: Scripts.Render("~/bundles/adminlte") %>
+        <%: Scripts.Render("~/bundles/adminlte/js") %>
     </asp:PlaceHolder>
 </body>
 </html>

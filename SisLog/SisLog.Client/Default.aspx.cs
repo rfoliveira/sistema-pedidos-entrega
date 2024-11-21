@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Security;
 using System.Web.UI;
 
 namespace SisLog.Client
@@ -7,7 +8,10 @@ namespace SisLog.Client
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
         }
     }
 }

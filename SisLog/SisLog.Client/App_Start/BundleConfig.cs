@@ -32,7 +32,8 @@ namespace SisLog.Client
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/adminlte").Include("~/Scripts/adminlte.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/adminlte/js").Include("~/Scripts/adminlte.min.js"));
+            bundles.Add(new StyleBundle("~/bundles/adminlte/css").IncludeDirectory("~/Content/adminlte", "*.css", true));
         }
 
         public static void RegisterJQueryScriptManager()

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace SisLog.Client
 {
@@ -11,7 +7,27 @@ namespace SisLog.Client
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectFromLoginPage(TxtEmail.Value, false);
+            }
+        }
 
+        protected void BtnLogin_Click(object sender, EventArgs e)
+        {
+            if (IsValidCredentials(TxtEmail.Value, TxtSenha.Value))
+            {
+                FormsAuthentication.RedirectFromLoginPage(TxtEmail.Value, false);
+            }
+            else
+            {
+                LblErrorMessages.Text = "Login e/ou senha inválidos";
+            }
+        }
+
+        private static bool IsValidCredentials(string email, string senha)
+        {
+            return email == "rafael@teste.com" && senha == "123456";
         }
     }
 }
