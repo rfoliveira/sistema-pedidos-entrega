@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using SisLog.Application.Commands.Pedido;
 using SisLog.Application.Queries.Pedido;
 using SisLog.Application.Responses.Pedido;
@@ -36,7 +35,7 @@ public class PedidosController : ControllerBase
     public async Task<IActionResult> CreatePedidoAsync([FromBody] CreatePedidoCommand pedido)
     {
         var pedidoNovo = await _mediatr.Send(pedido);
-        return CreatedAtRoute(new { usuarioId = 1 }, pedidoNovo);
+        return CreatedAtRoute(new { usuarioId = pedido.UsuarioId }, pedidoNovo);
     }
 
     [HttpPut]

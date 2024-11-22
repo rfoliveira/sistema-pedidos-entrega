@@ -48,14 +48,12 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="lembrar">
-                                <label for="lembrar">
-                                    Lembrar
-                                </label>
+                                <input type="checkbox" id="CbxLembrar" runat="server">
+                                <label for="lembrar">Lembrar</label>
                             </div>
                         </div>
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Acessar</button>
+                            <asp:Button ID="BtnVai" OnClick="BtnLogin_Click" Text="Vai Disgrama!" CssClass="btn btn-primary btn-block" runat="server" />
                         </div>
                     </div>
                 </form>

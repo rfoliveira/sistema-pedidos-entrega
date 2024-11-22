@@ -79,7 +79,7 @@ public class UsuariosController : ControllerBase
     public async Task<IActionResult> LoginAsync([FromBody] LoginUsuarioCommand login)
     {
         var usuarioValido = await _mediatr.Send(login);
-
+        
         var command = new CreateTokenCommand(
             usuarioValido.Id,
             usuarioValido.Nome,

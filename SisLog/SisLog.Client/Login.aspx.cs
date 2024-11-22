@@ -9,7 +9,7 @@ namespace SisLog.Client
         {
             if (User.Identity.IsAuthenticated)
             {
-                FormsAuthentication.RedirectFromLoginPage(TxtEmail.Value, false);
+                FormsAuthentication.RedirectFromLoginPage(GetUserFromEmail(TxtEmail.Value), CbxLembrar.Checked);
             }
         }
 
@@ -17,7 +17,7 @@ namespace SisLog.Client
         {
             if (IsValidCredentials(TxtEmail.Value, TxtSenha.Value))
             {
-                FormsAuthentication.RedirectFromLoginPage(TxtEmail.Value, false);
+                FormsAuthentication.RedirectFromLoginPage(GetUserFromEmail(TxtEmail.Value), CbxLembrar.Checked);
             }
             else
             {
@@ -27,7 +27,9 @@ namespace SisLog.Client
 
         private static bool IsValidCredentials(string email, string senha)
         {
-            return email == "rafael@teste.com" && senha == "123456";
+            return !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(senha);
         }
+
+        private static string GetUserFromEmail(string email) => email.Split('@')[0];
     }
 }

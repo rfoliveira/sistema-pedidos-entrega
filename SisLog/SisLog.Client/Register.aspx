@@ -21,7 +21,7 @@
                 SisLog
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Registar um novo usuário</p>
+                <p class="login-box-msg">Registrar um novo usuário</p>
                 <form runat="server" id="FrmRegistrar">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Nome Completo" name="TxtNome">
