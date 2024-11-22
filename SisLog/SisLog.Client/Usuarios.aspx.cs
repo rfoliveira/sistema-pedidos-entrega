@@ -1,14 +1,12 @@
-﻿using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Web.Security;
 
 namespace SisLog.Client.Scripts
 {
     public partial class Usuarios : System.Web.UI.Page
     {
-        public IEnumerable<UsuarioDetalhes> Usuarios;
+        public IEnumerable<UsuarioDetalhes> UsuariosDetalhes;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,14 +17,8 @@ namespace SisLog.Client.Scripts
 
             if (IsPostBack)
             {
-                Usuarios = GetUsuarios();
+                UsuariosDetalhes = [];
             }
-        }
-
-        private IEnumerable<UsuarioDetalhes> GetUsuarios()
-        {
-            var apiUrl = ConfigurationManager.AppSettings["ApiUrl"];
-            var client = new RestClient(apiUrl + "/usuarios");
         }
 
         protected void Action_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)

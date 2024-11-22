@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <p class="form-control-plaintext">
-                                    ID: <%= Id.ToString() %>
+                                    ID: <%= Usuario.Id.ToString() %>
                                 </p>
                             </div>
                             <div class="form-group">

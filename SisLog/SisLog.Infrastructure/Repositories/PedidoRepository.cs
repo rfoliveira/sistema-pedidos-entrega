@@ -12,8 +12,8 @@ public class PedidoRepository(SisLogDbContext dbContext) : BaseRepository<Pedido
         return await DbContext.Pedidos.Where(p => p.UsuarioId == usuarioId).ToListAsync();
     }
 
-    public async Task<int> GetPedidosUsuarioCountAsync(int usuarioId)
+    public async Task<int> GerarNumeroPedidoByUsuarioAsync(int usuarioId)
     {
-        return await DbContext.Pedidos.CountAsync(p => p.UsuarioId == usuarioId);
+        return (await DbContext.Pedidos.CountAsync(p => p.UsuarioId == usuarioId)) + 1;
     }
 }

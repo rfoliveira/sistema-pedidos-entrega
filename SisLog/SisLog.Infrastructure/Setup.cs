@@ -21,7 +21,6 @@ public static class Setup
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         services.AddScoped<IPedidoRepository, PedidoRepository>();
-        services.AddScoped<IEntregaRepository, EntregaRepository>();
         
         return services;
     }

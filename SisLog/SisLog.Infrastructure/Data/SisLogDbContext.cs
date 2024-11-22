@@ -12,8 +12,6 @@ public class SisLogDbContext : DbContext
 
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
-    public DbSet<Entrega> Entregas { get; set; }
-    public DbSet<Endereco> Enderecos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

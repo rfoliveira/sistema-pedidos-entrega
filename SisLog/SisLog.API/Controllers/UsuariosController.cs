@@ -53,6 +53,23 @@ public class UsuariosController : ControllerBase
         return CreatedAtRoute(new { id = usuarioNovo.Id }, usuarioNovo);
     }
 
+    [HttpPost("Login")]
+    [AllowAnonymous]
+    public async Task<IActionResult> LoginAsync([FromBody] LoginUsuarioCommand login)
+    {
+        var usuarioValido = await _mediatr.Send(login);
+
+        var command = new CreateTokenCommand(
+            usuarioValido.Id,
+            usuarioValido.Nome,
+            usuarioValido.Email
+        );
+
+        var token = await _mediatr.Send(command);
+
+        return Ok(token);
+    }
+
     [HttpPut]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> UpdateAsync([FromBody] UpdateUsuarioCommand usuario)
@@ -72,22 +89,5 @@ public class UsuariosController : ControllerBase
         await _mediatr.Send(command);
 
         return NoContent();
-    }
-
-    [HttpPost("Login")]
-    [AllowAnonymous]
-    public async Task<IActionResult> LoginAsync([FromBody] LoginUsuarioCommand login)
-    {
-        var usuarioValido = await _mediatr.Send(login);
-        
-        var command = new CreateTokenCommand(
-            usuarioValido.Id,
-            usuarioValido.Nome,
-            usuarioValido.Email
-        );
-
-        var token = await _mediatr.Send(command);
-
-        return Ok(token);
     }
 }

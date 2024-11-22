@@ -12,7 +12,7 @@ using SisLog.Infrastructure.Data;
 namespace SisLog.Infrastructure.Migrations
 {
     [DbContext(typeof(SisLogDbContext))]
-    [Migration("20241118134411_InitialCreate")]
+    [Migration("20241122193514_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace SisLog.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SisLog.Domain.Entities.Endereco", b =>
+            modelBuilder.Entity("SisLog.Domain.Entities.Pedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,12 +54,20 @@ namespace SisLog.Infrastructure.Migrations
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DataHoraEntrega")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("Numero")
+                    b.Property<int>("Numero")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("RemovidoEm")
@@ -69,79 +77,6 @@ namespace SisLog.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Enderecos");
-                });
-
-            modelBuilder.Entity("SisLog.Domain.Entities.Entrega", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("AtualizadoEm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CriadoEm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DataHoraEntrega")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EnderecoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("RemovidoEm")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EnderecoId")
-                        .IsUnique();
-
-                    b.HasIndex("PedidoId")
-                        .IsUnique();
-
-                    b.ToTable("Entregas");
-                });
-
-            modelBuilder.Entity("SisLog.Domain.Entities.Pedido", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("AtualizadoEm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CriadoEm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("EntregaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("RemovidoEm")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -177,39 +112,20 @@ namespace SisLog.Infrastructure.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("RemovidoEm")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("SisLog.Domain.Entities.Entrega", b =>
-                {
-                    b.HasOne("SisLog.Domain.Entities.Endereco", "Endereco")
-                        .WithOne("Entrega")
-                        .HasForeignKey("SisLog.Domain.Entities.Entrega", "EnderecoId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("SisLog.Domain.Entities.Pedido", "Pedido")
-                        .WithOne("Entrega")
-                        .HasForeignKey("SisLog.Domain.Entities.Entrega", "PedidoId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Endereco");
-
-                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("SisLog.Domain.Entities.Pedido", b =>
@@ -222,17 +138,6 @@ namespace SisLog.Infrastructure.Migrations
                         .HasConstraintName("FK_Usuario");
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("SisLog.Domain.Entities.Endereco", b =>
-                {
-                    b.Navigation("Entrega");
-                });
-
-            modelBuilder.Entity("SisLog.Domain.Entities.Pedido", b =>
-                {
-                    b.Navigation("Entrega")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SisLog.Domain.Entities.Usuario", b =>

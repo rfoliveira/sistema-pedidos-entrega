@@ -1,0 +1,31 @@
+@host = https://localhost:7246/api/v1
+
+GET {{host}}/pedidos
+
+###
+
+GET {{host}}/pedidos/{id}
+
+###
+
+POST {{host}}/pedidos
+Content-Type: application/json
+
+{
+    //CreatePedidoCommand
+}
+
+###
+
+PUT {{host}}/pedidos
+Content-Type: application/json
+
+{
+    //UpdatePedidoCommand
+}
+
+###
+
+DELETE {{host}}/pedidos/{id}
+
+###

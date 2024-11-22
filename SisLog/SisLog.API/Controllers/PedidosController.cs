@@ -46,7 +46,7 @@ public class PedidosController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id")]
+    [HttpDelete("{id}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> DeleteAsync(int id)
     {

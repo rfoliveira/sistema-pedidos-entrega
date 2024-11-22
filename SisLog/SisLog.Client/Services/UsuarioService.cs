@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using RestSharp.Authenticators;
 using SisLog.Client.ViewModels;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +11,7 @@ namespace SisLog.Client.Services
         private static UsuarioService _instance = null;
         private readonly IRestClient _client;
         private const string ENDPOINT = "usuarios";
+        private string _token;
 
         public static UsuarioService GetInstance()
         {
@@ -24,6 +26,13 @@ namespace SisLog.Client.Services
             _client = new RestClient(ConfigurationManager.AppSettings["ApiUrl"]);
         }
 
+        private UsuarioService GetToken(string email, string senha)
+        {
+            var token = _client.PostJson(ENDPOINT + "/login", new { email, senha });
+
+            return this;
+        }
+
         public IEnumerable<UsuarioDetalhesViewModel> GetAllAsync() 
             => _client.GetAsync<IEnumerable<UsuarioDetalhesViewModel>>(ENDPOINT).Result;
 
@@ -32,7 +41,7 @@ namespace SisLog.Client.Services
 
         public string Login(string email, string senha)
         {
-            //
+            return "";
         }
     }
 }

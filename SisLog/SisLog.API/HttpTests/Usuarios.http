@@ -1,0 +1,45 @@
+@host = https://localhost:7246/api/v1
+
+GET {{host}}/usuarios
+
+###
+
+GET {{host}}/usuarios/{id}
+
+###
+
+POST {{host}}/Usuarios/Register
+Content-Type: application/json
+
+{
+    "nome": "Fulano Silva",
+    "email": "fulano@teste.com.br",
+    "senha": "fulano123"
+}
+
+###
+
+POST {{host}}/usuarios/Login
+Content-Type: application/json
+
+{
+  "email": "fulano@teste.com.br",
+  "senha": "fulano123"
+}
+
+###
+
+PUT {{host}}/usuarios
+Content-Type: application/json
+
+{
+    "nome": "Fulano Silva Alterado",
+    "email": "fulano.alterado@teste.com.br",
+    "senha": "fulano123456"
+}
+
+###
+
+DELETE {{host}}/usuarios/{id}
+
+###

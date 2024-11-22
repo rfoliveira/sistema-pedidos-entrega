@@ -32,7 +32,7 @@ public class CreatePedidoHandler : IRequestHandler<CreatePedidoCommand, PedidoRe
         }
 
         var pedido = request.Adapt<Domain.Entities.Pedido>();
-        pedido.Numero = await _pedidoRepo.GetPedidosUsuarioCountAsync(request.UsuarioId) + 1;
+        pedido.Numero = await _pedidoRepo.GerarNumeroPedidoByUsuarioAsync(request.UsuarioId);
 
         var pedidoNovo = await _pedidoRepo.CreateAsync(pedido);
         _logger.LogInformation("Pedido #{Numero} criado com sucesso", pedidoNovo.Numero);
