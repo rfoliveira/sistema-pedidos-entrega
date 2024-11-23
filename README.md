@@ -9,7 +9,7 @@ Sistema voltado para gerenciamento de pedidos diversos.
 ## Premissas 
 - [x] Usar SQL Server
 - [x] Backend em asp.net core com API REST
-- [ ] Front em WebForms
+- [x] Front em WebForms
 - [x] Cadastro de usuários
 - [x] Uso de JWT para autenticação
 - [ ] Uso de API ~~dos correios~~ para obtenção do endereço
@@ -17,6 +17,6 @@ Sistema voltado para gerenciamento de pedidos diversos.
     Outra boa e funcional opção: https://brasilapi.com.br/api/cep/v2/{cep}
 
 ## Telas
-- [ ] Cadastro de usuários
+- [x] Cadastro de usuários
 - [ ] Cadastro de pedidos
 - [ ] Acompanhamento de pedidos
