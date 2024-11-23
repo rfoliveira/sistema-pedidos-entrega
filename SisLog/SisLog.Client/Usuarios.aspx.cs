@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SisLog.Client.Services;
+using SisLog.Client.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Web.Security;
 
@@ -6,7 +8,7 @@ namespace SisLog.Client.Scripts
 {
     public partial class Usuarios : System.Web.UI.Page
     {
-        public IEnumerable<UsuarioDetalhes> UsuariosDetalhes;
+        public IEnumerable<UsuarioDetalhesViewModel> Detalhes;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,7 +19,7 @@ namespace SisLog.Client.Scripts
 
             if (IsPostBack)
             {
-                UsuariosDetalhes = [];
+                Detalhes = UsuarioService.Instancia().GetAll();
             }
         }
 

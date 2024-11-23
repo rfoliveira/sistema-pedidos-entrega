@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SisLog.Client.Services;
+using System;
 using System.Web.Security;
 
 namespace SisLog.Client
@@ -27,7 +28,7 @@ namespace SisLog.Client
 
         private static bool IsValidCredentials(string email, string senha)
         {
-            return !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(senha);
+            return UsuarioService.Instancia().Login(email, senha).IsAuthenticated;
         }
 
         private static string GetUserFromEmail(string email) => email.Split('@')[0];

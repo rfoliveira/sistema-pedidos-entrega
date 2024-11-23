@@ -1,7 +1,6 @@
-﻿using RestSharp;
+﻿using SisLog.Client.Services;
 using SisLog.Client.ViewModels;
 using System;
-using System.Configuration;
 
 namespace SisLog.Client
 {
@@ -16,16 +15,8 @@ namespace SisLog.Client
             if (IsPostBack)
             {
                 Action = Request.QueryString["action"];
-                Usuario = GetUsuarioDetalhe(int.Parse(Request.QueryString["id"]));
+                Usuario = UsuarioService.Instancia().GetUsuarioById(int.Parse(Request.QueryString["id"]));
             }
-        }
-
-        private static UsuarioDetalhesViewModel GetUsuarioDetalhe(int usuarioId)
-        {
-            var apiUrl = ConfigurationManager.AppSettings["ApiUrl"];
-            var client = new RestClient($"{apiUrl}/usuarios/{usuarioId}");
-
-            return client.GetAsync<UsuarioDetalhesViewModel>(apiUrl).Result;
         }
     }
 }

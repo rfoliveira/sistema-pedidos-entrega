@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SisLog.Application.Commands.Usuario;
 using SisLog.Application.Exceptions.Usuario;
 using SisLog.Application.Responses.Usuario;
+using SisLog.Domain.Extensions;
 using SisLog.Domain.Repositories;
 
 namespace SisLog.Application.Handlers.Usuario;
@@ -31,7 +32,7 @@ public class UpdateUsuarioHandler : IRequestHandler<UpdateUsuarioCommand, Unit>
 
         usuarioAAlterar.Nome = request.Nome;
         usuarioAAlterar.Email = request.Email;
-        usuarioAAlterar.Senha = request.Senha;
+        usuarioAAlterar.Senha = request.Senha.Hash();
 
         var usuario = usuarioAAlterar.Adapt<Domain.Entities.Usuario>();
         usuario = await _repo.UpdateAsync(usuario);

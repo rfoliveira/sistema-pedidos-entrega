@@ -8,11 +8,11 @@ public class UsuarioRepository(SisLogDbContext dbContext) : BaseRepository<Usuar
 {
     public async Task<Usuario?> GetByNome(string nome)
     {
-        return (await GetAllAsync(u => u.Nome.ToLowerInvariant() == nome.ToLowerInvariant())).FirstOrDefault();
+        return (await GetAllAsync(u => u.Nome == nome)).FirstOrDefault();
     }
 
     public async Task<Usuario?> GetByEmail(string email)
     {
-        return (await GetAllAsync(u => u.Email.ToLowerInvariant() == email.ToLowerInvariant())).FirstOrDefault();
+        return (await GetAllAsync(u => u.Email == email)).FirstOrDefault();
     }
 }

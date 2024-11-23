@@ -46,6 +46,14 @@ public class PedidosController : ControllerBase
         return NoContent();
     }
 
+    [HttpPatch("entrega")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    public async Task<IActionResult> UpdateEntregaAsync([FromBody] UpdateEntregaCommand dadosEntrega)
+    {
+        await _mediatr.Send(dadosEntrega);
+        return NoContent();
+    }
+
     [HttpDelete("{id}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> DeleteAsync(int id)

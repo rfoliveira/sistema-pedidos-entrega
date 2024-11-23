@@ -17,15 +17,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="TxtNome">Nome</label>
-                                <input type="text" class="form-control" id="TxtNome" placeholder="Nome">
+                                <input type="text" class="form-control" id="TxtNome" placeholder="Nome" value="<%=Usuario.Nome %>">
                             </div>
                             <div class="form-group">
                                 <label for="TxtEmail">Email</label>
-                                <input type="email" class="form-control" id="TxtEmail" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="TxtSenha">Password</label>
-                                <input type="password" class="form-control" id="TxtSenha" placeholder="Password">
+                                <input type="email" class="form-control" id="TxtEmail" placeholder="Email" value="<%=Usuario.Email %>">
                             </div>
                         </div>
                     </div>
