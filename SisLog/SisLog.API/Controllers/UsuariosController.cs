@@ -90,4 +90,12 @@ public class UsuariosController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("info")]
+    public async Task<IActionResult> GetCurrentUserInfoAsync()
+    {
+        var claims = await _mediatr.Send(new GetCurrentUserInfoQuery());
+
+        return Ok(claims);
+    }
 }

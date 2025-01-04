@@ -1,5 +1,5 @@
 # sistema-pedidos-entrega
-Sistema de logistica com cadastro de usuários, pedidiso e entregas
+Sistema de logistica com cadastro de usuários, pedidos e entregas
 
 Ref.: [Contexto](https://pastebin.com/zSF1S3QJ)
 

@@ -1,6 +1,7 @@
 ﻿using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -79,7 +80,7 @@ internal static class Setup
 
     private static void AddJwt(this IHostApplicationBuilder builder)
     {
-        builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+		builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
         builder.Services.AddSingleton<ITokenSettings>(sp => sp.GetRequiredService<IOptions<TokenSettings>>().Value);
 
         builder.Services.AddAuthorization();

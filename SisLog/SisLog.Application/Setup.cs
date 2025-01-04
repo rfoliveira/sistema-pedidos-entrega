@@ -10,7 +10,9 @@ public static class Setup
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddMediatR(cfg =>
+        services.AddHttpContextAccessor();
+
+		services.AddMediatR(cfg =>
         {
             // registro de todos os handlers usando reflection
             cfg.RegisterServicesFromAssemblies(typeof(GetByIdUsuarioHandler).Assembly);
